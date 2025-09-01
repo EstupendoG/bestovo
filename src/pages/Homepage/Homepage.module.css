@@ -1,27 +1,36 @@
 article.aboutContainer {
-    display: flex;
-    gap: 40px;
+    display: grid;
+    grid-template-rows: repeat(2 fit-content);
+    grid-template-columns: repeat(2 fit-content);
+    grid-template-areas: 
+        'pic title'
+        'pic content';
 
     animation: slide-fade 2s ease-out forwards;
 }
 
     img.aboutImg {
+        margin-right: 40px;
         max-width: 250px;
         height: fit-content;
+
+        grid-area: pic;
+    }
+
+    .aboutTitle {
+        margin: 10px 0;
+        font-family: var(--mainFont);
+        font-size: 2em;
+
+        grid-area: title;
     }
 
     aside.aboutContents {
-
+        grid-area: content;
     }
 
-        .aboutTitle {
-            margin: 10px 0px;
-            font-family: var(--mainFont);
-            font-size: 2em;
-        }
-
         p.aboutText {
-            margin-bottom: 20px;
+            margin-bottom: 10px;
 
             font-weight: 300;
             font-size: 1.1em;
@@ -36,6 +45,7 @@ article.aboutContainer {
 
             a.contact {
                 background: var(--bgColor2);
+                margin-top: 10px;
                 padding: 10px 20px;
 
                 border-radius: 50px;
