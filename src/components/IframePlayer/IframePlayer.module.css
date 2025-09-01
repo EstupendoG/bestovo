@@ -1,0 +1,7 @@
+iframe.projectVideo{
+    width: 0;
+
+    border-radius: 10px;
+
+    flex-grow: 1;
+}

@@ -1,6 +1,11 @@
+import { useState } from 'react'
+import Skeleton from '../../components/Skeleton/Skeleton'
+import IframePlayer from '../../components/IframePlayer/IframePlayer'
+import bestovoPic from '../../assets/img/bestovo.png'
 import styles from './Homepage.module.css'
 
 export default function Homepage() {
+
     return(
         <main id='mainContainer'>
 
@@ -15,7 +20,7 @@ export default function Homepage() {
             </header>
 
             <article className={styles.aboutContainer}>
-                <img src="https://media.gettyimages.com/id/2169740304/photo/college-student-outdoor-travel-chest-bag.jpg?s=612x612&w=gi&k=20&c=IKDLlxtx3ScYE8e2Xsi9ebiwjFbivfbT48wS6BCs4tk=" alt="A picture of Bestovo, a japanese guy." className={styles.aboutImg} />
+                <img src={bestovoPic} alt="A picture of Bestovo, a japanese guy." className={styles.aboutImg} />
 
                 <h3 className={styles.aboutTitle}>
                     About <span className="red-hl">Me</span>
@@ -53,10 +58,15 @@ export default function Homepage() {
                 </h3>
 
                 <div className={styles.projectDisplay}>
-                    <iframe src="https://www.youtube.com/embed/Co7t6NxsW-4?si=phbhNZb99Hp_5grb" title="YouTube video player" frameborder="0" allow="" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen className={styles.projectVideo}></iframe>
-                    <iframe src="https://www.youtube.com/embed/Co7t6NxsW-4?si=phbhNZb99Hp_5grb" title="YouTube video player" frameborder="0" allow="" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen className={styles.projectVideo}></iframe>
-                    <iframe src="https://www.youtube.com/embed/Co7t6NxsW-4?si=phbhNZb99Hp_5grb" title="YouTube video player" frameborder="0" allow="" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen className={styles.projectVideo}></iframe>
+                    <IframePlayer url={'https://www.youtube.com/embed/Co7t6NxsW-4?si=phbhNZb99Hp_5grb'} title={"Sure it's a calming notion"} />
+                    <IframePlayer url={'https://www.youtube.com/embed/Co7t6NxsW-4?si=phbhNZb99Hp_5grb'} title={"Perpetual in Motion"} />
+                    <IframePlayer url={'https://www.youtube.com/embed/Co7t6NxsW-4?si=phbhNZb99Hp_5grb'} title={"But it's a lie"} />
                 </div>
+
+                <a className={styles.portfolioBtn} href="#/portfolio">
+                    See my Portfolio
+                    <i className="bi bi-chevron-right"></i>
+                </a>
             </article>
 
 

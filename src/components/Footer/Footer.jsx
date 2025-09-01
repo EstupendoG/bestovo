@@ -23,9 +23,9 @@ const Footer = () => {
             </div>
             <p className={styles.creditsArea}>
                 Developed by 
-                <span className={styles.github}>
+                <a className={styles.github} href='https://github.com/EstupendoG/bestovo' target='_blank'>
                     EstupendoG
-                </span>
+                </a>
             </p>
         </footer>
     )
