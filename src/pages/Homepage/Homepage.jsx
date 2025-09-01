@@ -54,6 +54,8 @@ export default function Homepage() {
 
                 <div className={styles.projectDisplay}>
                     <iframe src="https://www.youtube.com/embed/Co7t6NxsW-4?si=phbhNZb99Hp_5grb" title="YouTube video player" frameborder="0" allow="" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen className={styles.projectVideo}></iframe>
+                    <iframe src="https://www.youtube.com/embed/Co7t6NxsW-4?si=phbhNZb99Hp_5grb" title="YouTube video player" frameborder="0" allow="" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen className={styles.projectVideo}></iframe>
+                    <iframe src="https://www.youtube.com/embed/Co7t6NxsW-4?si=phbhNZb99Hp_5grb" title="YouTube video player" frameborder="0" allow="" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen className={styles.projectVideo}></iframe>
                 </div>
             </article>
 
