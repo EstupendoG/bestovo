@@ -2,7 +2,7 @@ import styles from './Portfolio.module.css'
 
 export default function Portfolio() {
     return(
-        <>
+        <main id='mainContainer'>
             <header id="page-titles">
                 <h2 className="name-title">
                     best
@@ -12,6 +12,6 @@ export default function Portfolio() {
                     All my <span className='red-hl'>Projects </span>
                 </h1>
             </header>
-        </>
+        </main>
     )
 }

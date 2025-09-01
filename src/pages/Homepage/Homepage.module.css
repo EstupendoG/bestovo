@@ -77,26 +77,30 @@ article.aboutContainer {
                 a.contact:active {
                     background: var(--bgColor2);
 
-                    border: 1px solid var(--color1);
-                    
                     scale: .9;
                     animation: none;
+                    transition: all 50ms ease-out;
                 }
 
 article.projectContainer{
-    margin-top: 50px;
+    margin-top: 100px;
 
-    animation: fade-slide 2s ease-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+
+    animation: slide-fade 2s ease-out;
 }
 
     article.projectContainer .projTitle{
         font-family: var(--mainFont);
         font-size: 2em;
-        margin-bottom: 20px;
     }
 
     div.projectDisplay{
         background-color: var(--bgColor2);
+        width: 100%;
         padding: 20px;
 
         display: flex;
@@ -105,23 +109,56 @@ article.projectContainer{
         border-radius: 10px;
     }
 
-        iframe.projectVideo{
-            width: 0;
+    a.portfolioBtn{
+        background: var(--color1);
+        padding: 10px 50px;
+        
+        display: inline-block;
 
-            border-radius: 10px;
+        color: var(--txtColor);
+        font-size: 1.3em;
+        font-weight: 500;
+        text-decoration: none;
 
-            flex-grow: 1;
+        border-radius: 50px;
+
+        cursor: pointer;
+        user-select: none;
+        transition: all 200ms ease-out;
+    }
+
+        a.portfolioBtn:hover{
+            background: 
+                linear-gradient(
+                    45deg,
+                    transparent 0%,
+                    rgba(255, 255, 255, 0.3) 60%,
+                    transparent 100%
+                ),
+                var(--color1);
+
+            text-decoration: underline;
+            
+            scale: 1.05;
+            animation: shine-background 1s ease-out infinite;
+        }
+
+        a.portfolioBtn:active{
+            background: var(--bgColor2);
+
+            text-decoration: none;
+
+            scale: .9;
+            animation: none;
+        transition: all 100ms ease-out;
         }
 
 
-
-
-
-
-
+        
 @keyframes shine-background {
     from{
         background-size: 500% 100%;
+        background-position: left;
     }
     to{
         background-size: 500% 100%;

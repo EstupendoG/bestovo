@@ -53,17 +53,19 @@ footer#footer {
         display: flex;
     }
 
-        span.github {
+        a.github {
             margin-left: 10px;
 
+            color: var(--txtColor);
             font-weight: 500;
+            text-decoration: none;
             
             user-select: none;
             cursor: pointer;
             transition: all 150ms ease-out;
         }
 
-            span.github::before{
+            a.github::before{
                 content: '\F3ED';
                 font-family: 'bootstrap-icons';
                 
@@ -71,11 +73,11 @@ footer#footer {
                 margin-right: 3px;
             }
 
-            span.github:hover {
+            a.github:hover {
                 scale: 1.1;
                 text-decoration: underline;
             }
 
-            span.github:active {
+            a.github:active {
                 scale: .9;
             }
