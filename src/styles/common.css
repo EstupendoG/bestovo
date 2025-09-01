@@ -9,6 +9,7 @@ body{
         max-width: 900px;
         margin: 0 auto;
         padding: 25px;
+        padding-bottom: 50px;
     }
 
     span.red-hl{
@@ -16,7 +17,7 @@ body{
     }
 
     header#page-titles{
-        margin-bottom: 50px;
+        margin-bottom: 100px;
 
         font-family: var(--mainFont);
         text-align: center;
