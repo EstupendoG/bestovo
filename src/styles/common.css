@@ -1,0 +1,35 @@
+body{
+    background-color: var(--bgColor1);
+
+    color: var(--txtColor);
+    font-family: var(--txtFont);
+}
+
+    main#mainContainer{
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 25px;
+    }
+
+    span.red-hl{
+        color: var(--color1);
+    }
+
+    header#page-titles{
+        margin-bottom: 50px;
+
+        font-family: var(--mainFont);
+        text-align: center;
+    }
+
+        #page-titles .name-title{
+            margin-bottom: 15px;
+            font-size: 1.5em;
+            text-transform: uppercase;
+            
+            opacity: 70%;
+        }
+
+        #page-titles .main-title{
+            font-size: 3em;            
+        }

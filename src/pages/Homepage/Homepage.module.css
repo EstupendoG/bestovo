@@ -1,0 +1,95 @@
+article.aboutContainer {
+    display: flex;
+    gap: 40px;
+
+    animation: slide-fade 2s ease-out forwards;
+}
+
+    img.aboutImg {
+        max-width: 250px;
+        height: fit-content;
+    }
+
+    aside.aboutContents {
+
+    }
+
+        .aboutTitle {
+            margin: 10px 0px;
+            font-family: var(--mainFont);
+            font-size: 2em;
+        }
+
+        p.aboutText {
+            margin-bottom: 20px;
+
+            font-weight: 300;
+            font-size: 1.1em;
+            word-spacing: 3px;
+            line-height: 23px;
+        }
+
+        div.contactContainer {
+            display: flex;
+            gap: 10px;
+        }
+
+            a.contact {
+                background: var(--bgColor2);
+                padding: 10px 20px;
+
+                border-radius: 50px;
+
+                color: var(--txtColor);
+                font-size: 1.05em;
+                text-decoration: none;
+
+                display: flex;
+                gap: 10px;
+
+                transition: all 200ms ease-out;
+            }
+
+                a.contact:hover {
+                    background: 
+                        linear-gradient(
+                            45deg,
+                            transparent 0%,
+                            rgba(255, 255, 255, 0.3) 60%,
+                            transparent 100%
+                        ),
+                        var(--color1);
+                    
+                    scale: 1.05;
+                    animation: shine-background 1s ease-out infinite;
+                }
+
+                a.contact:active {
+                    background: var(--bgColor2);
+
+                    border: 1px solid var(--color1);
+                    
+                    scale: .9;
+                    animation: none;
+                }
+
+@keyframes shine-background {
+    from{
+        background-size: 500% 100%;
+    }
+    to{
+        background-size: 500% 100%;
+        background-position: right;
+    }   
+}
+
+@keyframes slide-fade {
+    from{
+        transform: translateX(20px);
+        opacity: 0%;
+    }
+    to{
+        transform: translateX(0px);
+        opacity: 100%;
+    }
+}

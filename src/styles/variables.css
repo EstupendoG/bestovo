@@ -1,0 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Racing+Sans+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Racing+Sans+One&display=swap');
+
+
+:root{
+    --color1: #DF2E5A;
+    --bgColor1: #272222;
+    --bgColor2: #3D3737;
+    --txtColor: #E6E9F1;
+
+    --mainFont: "Racing Sans One", sans-serif;
+    --txtFont: "Montserrat", sans-serif;
+}
