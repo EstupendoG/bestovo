@@ -1,5 +1,6 @@
 iframe.projectVideo{
-    width: 0;
+    min-width: 0;
+    height: 100%;
 
     border-radius: 10px;
 

@@ -36,15 +36,15 @@ export default function Homepage() {
                     </p>
 
                     <div className={styles.contactContainer}>
-                        <a href="" className={styles.contact}>
+                        <a href="https://discord.com/users/451961486458355723" className={styles.contact} target='_blank'>
                             <i className="bi bi-discord"></i>
                             Discord
                         </a>
-                        <a href="" className={styles.contact}>
+                        <a href='https://twitter.com/AllanBestovo123' className={styles.contact} target='_blank'>
                             <i className="bi bi-twitter-x"></i>
                             Twitter
                         </a>
-                        <a href="" className={styles.contact}>
+                        <a href='mailto:business@allanediting.com.br' className={styles.contact} target='_blank'>
                             <i className="bi bi-envelope-fill"></i>
                             Gmail
                         </a>
