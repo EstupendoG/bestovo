@@ -1,6 +1,6 @@
 iframe.projectVideo{
     min-width: 0;
-    height: 100%;
+    aspect-ratio: 16 / 9;
 
     border-radius: 10px;
 

@@ -1,4 +1,6 @@
 article.aboutContainer {
+    margin: 0 70px;
+        
     display: grid;
     grid-template-rows: repeat(2 fit-content);
     grid-template-columns: repeat(2 fit-content);
@@ -180,77 +182,19 @@ article.projectContainer{
 
 
 
+@media (max-width:900px){
+    article.aboutContainer {
+        margin: 0 20px;
+            
+        display: grid;
+        grid-template-rows: repeat(2 fit-content);
+        grid-template-columns: repeat(2 fit-content);
+        grid-template-areas: 
+            'pic title'
+            'pic content';
 
-@media (max-width: 800px){
-    article.projectContainer{
-        margin-top: 100px;
-
-
-        animation: slide-fade 2s ease-out;
+        animation: slide-fade 2s ease-out forwards;
     }
-
-        article.projectContainer .projTitle{
-            font-family: var(--mainFont);
-            font-size: 2em;
-        }
-
-        div.projectDisplay{
-            background-color: var(--bgColor2);
-            width: 100%;
-            min-height: 1000px;
-            padding: 20px 30px;
-
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            
-            border-radius: 10px;
-        }
-
-        a.portfolioBtn{
-            background: var(--color1);
-            padding: 10px 50px;
-            
-            display: inline-block;
-
-            color: var(--txtColor);
-            font-size: 1.3em;
-            font-weight: 500;
-            text-decoration: none;
-
-            border-radius: 50px;
-
-            cursor: pointer;
-            user-select: none;
-            transition: all 200ms ease-out;
-        }
-
-            a.portfolioBtn:hover{
-                background: 
-                    linear-gradient(
-                        45deg,
-                        transparent 0%,
-                        rgba(255, 255, 255, 0.3) 60%,
-                        transparent 100%
-                    ),
-                    var(--color1);
-
-                text-decoration: underline;
-                
-                scale: 1.05;
-                animation: shine-background 1s ease-out infinite;
-            }
-
-            a.portfolioBtn:active{
-                background: var(--bgColor2);
-
-                text-decoration: none;
-
-                scale: .9;
-                animation: none;
-            transition: all 100ms ease-out;
-            }
-
 
 }
 
@@ -302,8 +246,9 @@ article.projectContainer{
 
 }
 
-@media (max-width: 600px) {
+@media (max-width: 625px) {
     article.aboutContainer {
+        margin: 0;
         grid-template-columns: min-content 1fr;
         grid-template-areas: 
             'pic title'
@@ -370,18 +315,18 @@ article.projectContainer{
 }
 
 
-@media (max-width: 425px) {
+@media (max-width: 426px) {
     article.aboutContainer {
         grid-template-columns: min-content 1fr;
         grid-template-areas: 
             'pic title'
             'content content';
-        gap: 25px 20px;
+        gap: 15px;
     }
 
         img.aboutImg {
-            width: 75px;
-            height: 75px;
+            width: 50px;
+            height: 50px;
             margin-right: 0px;
 
             border: 2px solid var(--color1);
@@ -394,7 +339,7 @@ article.projectContainer{
         .aboutTitle {
             margin: 0;
             
-            font-size: 2.3em;
+            font-size: 2em;
             
             display: flex;
             align-items: center;
@@ -436,5 +381,10 @@ article.projectContainer{
                     font-size: 1em;
                     gap: 5px;
                 }
+                
+    article.projectContainer {
+        margin-top: 25px;
+   }
+
 
 }
