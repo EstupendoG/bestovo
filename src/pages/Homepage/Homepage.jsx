@@ -1,10 +1,28 @@
 import { useState } from 'react'
-import Skeleton from '../../components/Skeleton/Skeleton'
-import IframePlayer from '../../components/IframePlayer/IframePlayer'
-import bestovoPic from '../../assets/img/bestovo.png'
 import styles from './Homepage.module.css'
 
+import Skeleton from '../../components/Skeleton/Skeleton'
+import IframePlayer from '../../components/IframePlayer/IframePlayer'
+import Carousel from '../../components/Carousel/Carousel'
+
+import bestovoPic from '../../assets/img/bestovo.png'
+
 export default function Homepage() {
+
+    const [iframeVideos, setIframeVideos] = useState([
+        {
+            title: "Sure it's a calming notion",
+            url: 'https://www.youtube.com/embed/Co7t6NxsW-4?si=phbhNZb99Hp_5grb',
+        },
+        {
+            title: "Perpetual in motion",
+            url: 'https://www.youtube.com/embed/W9Yjgf6eE_Y?si=0WfMfsfsIOriwXz-',
+        },
+        {
+            title: "But it's a lie",
+            url: 'https://www.youtube.com/embed/Co7t6NxsW-4?si=phbhNZb99Hp_5grb',
+        },
+    ])
 
     return(
         <main id='mainContainer'>
@@ -57,10 +75,8 @@ export default function Homepage() {
                     Main <span className="red-hl">Projects</span>
                 </h3>
 
-                <div className={styles.projectDisplay}>
-                    <IframePlayer url={'https://www.youtube.com/embed/Co7t6NxsW-4?si=phbhNZb99Hp_5grb'} title={"Sure it's a calming notion"} />
-                    <IframePlayer url={'https://www.youtube.com/embed/Co7t6NxsW-4?si=phbhNZb99Hp_5grb'} title={"Perpetual in Motion"} />
-                    <IframePlayer url={'https://www.youtube.com/embed/Co7t6NxsW-4?si=phbhNZb99Hp_5grb'} title={"But it's a lie"} />
+                <div className={styles.projectCarousel}>
+                    <Carousel videos={iframeVideos} shouldSwitchFrames={true} />
                 </div>
 
                 <a className={styles.portfolioBtn} href="#/portfolio">
