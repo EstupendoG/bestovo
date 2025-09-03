@@ -89,5 +89,16 @@ div.carousel{
             button#next{
                 right: 0;
             }
-    
+}
+
+@media (max-width: 426px) {
+    div.container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-grow: 1;
+
+        transition: transform 0.5s cubic-bezier(.77,0,.18,1);
+
+    }
 }

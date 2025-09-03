@@ -34,7 +34,7 @@ const Carousel = ({videos, itemsToShow = 3}) => {
                     }}>
                         <IframePlayer
                             title={vid.title}
-                            url={vid.url + '?rel=0'}
+                            url={vid.url + '?rel=0&modestbranding=1&controls=1&showinfo=0"'}
                             key={index}
                         />
                     </div>
