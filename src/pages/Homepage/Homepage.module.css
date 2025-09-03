@@ -1,4 +1,6 @@
 article.aboutContainer {
+    margin: 0 70px;
+        
     display: grid;
     grid-template-rows: repeat(2 fit-content);
     grid-template-columns: repeat(2 fit-content);
@@ -20,7 +22,7 @@ article.aboutContainer {
     .aboutTitle {
         margin: 10px 0;
         font-family: var(--mainFont);
-        font-size: 2em;
+        font-size: 2.1em;
 
         grid-area: title;
     }
@@ -87,7 +89,6 @@ article.projectContainer{
 
     display: flex;
     flex-direction: column;
-    align-items: center;
     gap: 20px;
 
     animation: slide-fade 2s ease-out;
@@ -95,28 +96,36 @@ article.projectContainer{
 
     article.projectContainer .projTitle{
         font-family: var(--mainFont);
-        font-size: 2em;
+        font-size: 2.1em;
     }
 
-    div.projectDisplay{
-        background-color: var(--bgColor2);
+    div.projectCarousel{
+        background: 
+            linear-gradient(
+                45deg,
+                transparent 0%,
+                rgba(255, 255, 255, 0.1) 50%,
+                transparent 100%
+            ),
+            var(--bgColor2);
         width: 100%;
-        padding: 20px;
+        padding: 0;
 
-        display: flex;
-        gap: 10px;
-        
         border-radius: 10px;
+
+        animation: shine-background 5s infinite ease-in-out;
     }
 
     a.portfolioBtn{
         background: var(--color1);
-        padding: 10px 50px;
+        width: fit-content;
+        padding: 15px 50px;
         
         display: inline-block;
+        align-self: center;
 
         color: var(--txtColor);
-        font-size: 1.3em;
+        font-size: 1.2em;
         font-weight: 500;
         text-decoration: none;
 
@@ -126,7 +135,6 @@ article.projectContainer{
         user-select: none;
         transition: all 200ms ease-out;
     }
-
         a.portfolioBtn:hover{
             background: 
                 linear-gradient(
@@ -142,7 +150,6 @@ article.projectContainer{
             scale: 1.05;
             animation: shine-background 1s ease-out infinite;
         }
-
         a.portfolioBtn:active{
             background: var(--bgColor2);
 
@@ -175,4 +182,219 @@ article.projectContainer{
         transform: translateX(0px);
         opacity: 100%;
     }
+}
+
+
+
+
+@media (max-width:900px){
+    article.aboutContainer {
+        margin: 0 20px;
+    }
+
+    article.projectContainer{
+        margin-top: 70px;
+    }
+
+    article.projectContainer{
+        margin-top: 70px;
+    }
+
+        a.portfolioBtn{
+            padding: 10px 50px;
+            
+            font-size: 1.2em;
+        }
+}
+
+
+
+
+@media (max-width: 750px) {
+    article.aboutContainer {
+        grid-template-areas: 
+            'title title'
+            'pic content';
+    }
+
+        img.aboutImg {
+            margin-right: 20px;
+            max-width: 230px;
+            height: fit-content;
+        }
+        
+        .aboutTitle {
+            text-align: center;
+            margin: 0 0 20px 0;
+            font-size: 2.3em;
+        }
+
+        aside.aboutContents {
+            grid-area: content;
+        }
+
+            p.aboutText {
+                margin-bottom: 12px;
+
+                font-size: 1em;
+                word-spacing: 1px;
+                line-height: 20px;
+            }
+
+            div.contactContainer {
+                gap: 5px;
+            }
+
+                a.contact {
+                    margin-top: 5px;
+                    padding: 7px 15px;
+
+                    font-size: 1em;
+                    gap: 5px;
+                }
+
+}
+
+@media (max-width: 625px) {
+    article.aboutContainer {
+        margin: 0;
+        grid-template-columns: min-content 1fr;
+        grid-template-areas: 
+            'pic title'
+            'content content';
+        gap: 25px 20px;
+    }
+
+        img.aboutImg {
+            width: 75px;
+            height: 75px;
+            margin-right: 0px;
+
+            border: 2px solid var(--color1);
+            border-radius: 50px;
+            
+            object-fit: cover;
+            object-position: 100% 30%;
+        }
+        
+        .aboutTitle {
+            margin: 0;
+            
+            font-size: 2.5em;
+            
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        aside.aboutContents {
+            background-color: var(--bgColor2);
+            padding: 25px 30px;
+
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.3);
+        }
+
+            p.aboutText {
+                margin-bottom: 20px;
+
+                font-size: 1.05em;
+                word-spacing: 3px;
+                line-height: 23px;
+                font-weight: 200;
+            }
+
+            div.contactContainer {
+                gap: 7px;
+            }
+
+                a.contact {
+                    background-color: var(--bgColor1);
+                    margin-top: 5px;
+                    padding: 13px 0px;
+                    flex-grow: 1;
+                    
+                    display: flex;
+                    justify-content: center;
+
+                    font-size: 1em;
+                    gap: 5px;
+                }
+    
+     article.projectContainer .projTitle{
+        font-size: 2.5em;
+    }
+}
+
+
+@media (max-width: 426px) {
+    article.aboutContainer {
+        grid-template-columns: min-content 1fr;
+        grid-template-areas: 
+            'pic title'
+            'content content';
+        gap: 15px;
+    }
+
+        img.aboutImg {
+            width: 50px;
+            height: 50px;
+            margin-right: 0px;
+
+            border: 2px solid var(--color1);
+            border-radius: 50px;
+            
+            object-fit: cover;
+            object-position: 100% 30%;
+        }
+        
+        .aboutTitle {
+            margin: 0;
+            
+            font-size: 2em;
+            
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        aside.aboutContents {
+            background-color: var(--bgColor2);
+            padding: 20px;
+
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.3);
+        }
+
+            p.aboutText {
+                margin-bottom: 20px;
+
+                font-size: 1em;
+            }
+
+            div.contactContainer {
+                flex-direction: column;
+                gap: 3px;
+            }
+
+    article.projectContainer {
+        margin: 50px 0;
+        gap: 15px;
+   }
+   
+        article.projectContainer .projTitle{
+            font-size: 2em;
+            text-align: center;
+        }
+
+            a.portfolioBtn{
+                width: 100%;
+                margin-top: 10px;
+                padding: 10px;
+                
+                font-size: 1em;
+                font-weight: 600;
+                text-align: center;
+            }
+
 }

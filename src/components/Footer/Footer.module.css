@@ -6,10 +6,13 @@ footer#footer {
     justify-content: space-between;
     align-items: center;
 
+    box-shadow: 0px -2px 10px rgba(0, 0, 0, 0.1);
+
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
+    z-index: 999;
 }
 
     div.contactsArea {
@@ -81,3 +84,60 @@ footer#footer {
             a.github:active {
                 scale: .9;
             }
+
+@media (max-width: 650px) {
+    footer#footer {
+        padding: 2px 10px;
+        
+        gap: 15px;
+    }
+
+            div.contactsArea p{
+                display: none;
+            }
+
+            div.container {
+                gap: 3px;
+
+                font-size: .85em;
+            }
+
+                a.contact {
+                    padding: 4px 5px;
+
+                    display: flex;
+                    gap: 5px;
+                }
+                    
+        p.creditsArea {
+            display: flex;
+            align-items: center;
+            
+            font-size: .7em;
+        }
+
+            a.github {
+                margin-left: 5px;
+            }
+    
+}
+
+@media (max-width: 425px) {
+    footer#footer {
+        position: static;
+        bottom: 0;
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px 20px;
+    }
+    
+        div.contactsArea {
+            width: 100%;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+            flex-direction: column;
+            gap: 5px;
+
+            border-bottom: 1px solid var(--txtColor);
+        }
+}

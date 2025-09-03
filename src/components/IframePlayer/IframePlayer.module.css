@@ -1,7 +1,9 @@
 iframe.projectVideo{
-    width: 0;
+    min-width: 0;
+    aspect-ratio: 16 / 9;
 
     border-radius: 10px;
 
     flex-grow: 1;
 }
+

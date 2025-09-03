@@ -1,10 +1,39 @@
-import { useState } from 'react'
-import Skeleton from '../../components/Skeleton/Skeleton'
-import IframePlayer from '../../components/IframePlayer/IframePlayer'
-import bestovoPic from '../../assets/img/bestovo.png'
+import { use, useEffect, useState } from 'react'
 import styles from './Homepage.module.css'
 
+import Skeleton from '../../components/Skeleton/Skeleton'
+import IframePlayer from '../../components/IframePlayer/IframePlayer'
+import Carousel from '../../components/Carousel/Carousel'
+
+import bestovoPic from '../../assets/img/bestovo.png'
+
 export default function Homepage() {
+
+    const [iframeVideos, setIframeVideos] = useState([
+        {
+            title: "Sure it's a calming notion",
+            url: 'https://www.youtube.com/embed/Co7t6NxsW-4?si=phbhNZb99Hp_5grb',
+        },
+        {
+            title: "Perpetual in motion",
+            url: 'https://www.youtube.com/embed/W9Yjgf6eE_Y?si=0WfMfsfsIOriwXz-',
+        },
+        {
+            title: "But it's a lie",
+            url: 'https://www.youtube.com/embed/Co7t6NxsW-4?si=phbhNZb99Hp_5grb',
+        },
+    ])
+
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth)
+
+    useEffect(() => {
+        const handleResize = () => {
+            setWindowWidth(window.innerWidth)
+        }
+        window.addEventListener('resize', handleResize)
+
+        return () => window.removeEventListener('resize', handleResize)
+    }, [])
 
     return(
         <main id='mainContainer'>
@@ -36,15 +65,15 @@ export default function Homepage() {
                     </p>
 
                     <div className={styles.contactContainer}>
-                        <a href="" className={styles.contact}>
+                        <a href="https://discord.com/users/451961486458355723" className={styles.contact} target='_blank'>
                             <i className="bi bi-discord"></i>
                             Discord
                         </a>
-                        <a href="" className={styles.contact}>
+                        <a href='https://twitter.com/AllanBestovo123' className={styles.contact} target='_blank'>
                             <i className="bi bi-twitter-x"></i>
                             Twitter
                         </a>
-                        <a href="" className={styles.contact}>
+                        <a href='mailto:business@allanediting.com.br' className={styles.contact} target='_blank'>
                             <i className="bi bi-envelope-fill"></i>
                             Gmail
                         </a>
@@ -57,10 +86,14 @@ export default function Homepage() {
                     Main <span className="red-hl">Projects</span>
                 </h3>
 
-                <div className={styles.projectDisplay}>
-                    <IframePlayer url={'https://www.youtube.com/embed/Co7t6NxsW-4?si=phbhNZb99Hp_5grb'} title={"Sure it's a calming notion"} />
-                    <IframePlayer url={'https://www.youtube.com/embed/Co7t6NxsW-4?si=phbhNZb99Hp_5grb'} title={"Perpetual in Motion"} />
-                    <IframePlayer url={'https://www.youtube.com/embed/Co7t6NxsW-4?si=phbhNZb99Hp_5grb'} title={"But it's a lie"} />
+                <div className={styles.projectCarousel}>
+                    <Carousel videos={iframeVideos} 
+                        itemsToShow={
+                            windowWidth < 900 ? 1 :
+                            windowWidth < 1200 ? 2 :
+                            (3)
+                        } 
+                    />
                 </div>
 
                 <a className={styles.portfolioBtn} href="#/portfolio">

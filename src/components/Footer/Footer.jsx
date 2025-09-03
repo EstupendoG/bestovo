@@ -6,16 +6,17 @@ const Footer = () => {
         <footer id={styles.footer}>
             <div className={styles.contactsArea}>
                 <p>Contact Me</p>
+                
                 <div className={styles.container}>
-                    <a className={styles.contact}>
+                    <a className={styles.contact} target='_blank' href="https://discord.com/users/451961486458355723">
                         <i className="bi bi-discord"></i>
                         Discord
                     </a>
-                    <a className={styles.contact}>
+                    <a className={styles.contact} target='_blank' href='https://twitter.com/AllanBestovo123'>
                         <i className="bi bi-twitter-x"></i>
                         Twitter
                     </a>
-                    <a className={styles.contact}>
+                    <a className={styles.contact} target='_blank' href='mailto:business@allanediting.com.br'>
                         <i className="bi bi-envelope-fill"></i>
                         Gmail
                     </a>
