@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 import IframePlayer from '../IframePlayer/IframePlayer';
 import styles from './Carousel.module.css';
 
-const Carousel = ({videos, itemToShow = 2}) => {
+const Carousel = ({videos, itemsToShow = 3}) => {
     const [currentIndex, setCurrentIndex] = useState(0);
-    const [itemsNum , setItemsToShow] = useState(itemToShow)
+    const [itemsNum , setItemsNum] = useState(itemsToShow)
 
     const changeIndex = (x) => {
         let newIndex = currentIndex + x;
@@ -14,20 +14,27 @@ const Carousel = ({videos, itemToShow = 2}) => {
 
         setCurrentIndex(newIndex);
     }
+
+    useEffect(() => {
+        setItemsNum(itemsToShow)
+    }, [itemsToShow])
     
     return (
         <div className={styles.carousel}>
+            <button className={styles.arrowBtn} id={styles.prev} onClick={() => changeIndex(-1)}>
+                <i className="bi bi-chevron-left"></i>
+            </button>
 
             <div className={styles.container} style={{
                 transform: `translateX(-${currentIndex * (100 / itemsNum)}%)`,
             }}>
                 {videos.map((vid, index) => (
                     <div className={styles.item} style={{
-                        minWidth: `calc(100% / ${itemToShow})`,
+                        flex: `0 0 calc(100% / ${itemsNum})`,
                     }}>
                         <IframePlayer
                             title={vid.title}
-                            url={vid.url}
+                            url={vid.url + '?rel=0'}
                             key={index}
                         />
                     </div>
@@ -36,9 +43,6 @@ const Carousel = ({videos, itemToShow = 2}) => {
 
             
             {/* BOTÕES */}
-            <button className={styles.arrowBtn} id={styles.prev} onClick={() => changeIndex(-1)}>
-                <i className="bi bi-chevron-left"></i>
-            </button>
             <button className={styles.arrowBtn} id={styles.next} onClick={() => changeIndex(1)}>
                 <i className="bi bi-chevron-right"></i>
             </button>

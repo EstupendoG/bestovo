@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { use, useEffect, useState } from 'react'
 import styles from './Homepage.module.css'
 
 import Skeleton from '../../components/Skeleton/Skeleton'
@@ -23,6 +23,17 @@ export default function Homepage() {
             url: 'https://www.youtube.com/embed/Co7t6NxsW-4?si=phbhNZb99Hp_5grb',
         },
     ])
+
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth)
+
+    useEffect(() => {
+        const handleResize = () => {
+            setWindowWidth(window.innerWidth)
+        }
+        window.addEventListener('resize', handleResize)
+
+        return () => window.removeEventListener('resize', handleResize)
+    }, [])
 
     return(
         <main id='mainContainer'>
@@ -76,7 +87,13 @@ export default function Homepage() {
                 </h3>
 
                 <div className={styles.projectCarousel}>
-                    <Carousel videos={iframeVideos} shouldSwitchFrames={true} />
+                    <Carousel videos={iframeVideos} 
+                        itemsToShow={
+                            windowWidth < 900 ? 1 :
+                            windowWidth < 1200 ? 2 :
+                            (3)
+                        } 
+                    />
                 </div>
 
                 <a className={styles.portfolioBtn} href="#/portfolio">

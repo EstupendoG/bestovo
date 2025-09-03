@@ -22,7 +22,7 @@ article.aboutContainer {
     .aboutTitle {
         margin: 10px 0;
         font-family: var(--mainFont);
-        font-size: 2em;
+        font-size: 2.1em;
 
         grid-area: title;
     }
@@ -96,18 +96,24 @@ article.projectContainer{
 
     article.projectContainer .projTitle{
         font-family: var(--mainFont);
-        font-size: 2em;
+        font-size: 2.1em;
     }
 
     div.projectCarousel{
-        background-color: var(--bgColor2);
+        background: 
+            linear-gradient(
+                45deg,
+                transparent 0%,
+                rgba(255, 255, 255, 0.1) 50%,
+                transparent 100%
+            ),
+            var(--bgColor2);
         width: 100%;
-        padding: 20px;
+        padding: 0;
 
-        display: flex;
-        gap: 10px;
-        
         border-radius: 10px;
+
+        animation: shine-background 5s infinite ease-in-out;
     }
 
     a.portfolioBtn{
@@ -190,11 +196,15 @@ article.projectContainer{
         margin-top: 70px;
     }
 
-        div.projectCarousel{
-            flex-direction: column;
-            gap: 20px;
-        }
+    article.projectContainer{
+        margin-top: 70px;
+    }
 
+        a.portfolioBtn{
+            padding: 10px 50px;
+            
+            font-size: 1.2em;
+        }
 }
 
 
@@ -270,7 +280,7 @@ article.projectContainer{
         .aboutTitle {
             margin: 0;
             
-            font-size: 2.3em;
+            font-size: 2.5em;
             
             display: flex;
             align-items: center;
@@ -289,7 +299,6 @@ article.projectContainer{
                 margin-bottom: 20px;
 
                 font-size: 1.05em;
-                text-align: left;
                 word-spacing: 3px;
                 line-height: 23px;
                 font-weight: 200;
@@ -311,6 +320,10 @@ article.projectContainer{
                     font-size: 1em;
                     gap: 5px;
                 }
+    
+     article.projectContainer .projTitle{
+        font-size: 2.5em;
+    }
 }
 
 
@@ -357,10 +370,6 @@ article.projectContainer{
                 margin-bottom: 20px;
 
                 font-size: 1em;
-                text-align: left;
-                word-spacing: 3px;
-                line-height: 23px;
-                font-weight: 200;
             }
 
             div.contactContainer {
@@ -368,22 +377,24 @@ article.projectContainer{
                 gap: 3px;
             }
 
-                a.contact {
-                    background-color: var(--bgColor1);
-                    margin-top: 5px;
-                    padding: 15px 0px;
-                    flex-grow: 1;
-                    
-                    display: flex;
-                    justify-content: center;
-
-                    font-size: 1em;
-                    gap: 5px;
-                }
-                
     article.projectContainer {
-        margin-top: 25px;
+        margin: 50px 0;
+        gap: 15px;
    }
+   
+        article.projectContainer .projTitle{
+            font-size: 2em;
+            text-align: center;
+        }
 
+            a.portfolioBtn{
+                width: 100%;
+                margin-top: 10px;
+                padding: 10px;
+                
+                font-size: 1em;
+                font-weight: 600;
+                text-align: center;
+            }
 
 }
