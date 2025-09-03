@@ -30,7 +30,7 @@ const Carousel = ({videos, itemsToShow = 3}) => {
             }}>
                 {videos.map((vid, index) => (
                     <div className={styles.item} style={{
-                        flex: `0 0 calc(100% / ${itemsNum})`,
+                        minWidth: `calc(100% / ${itemsNum})`,
                     }}>
                         <IframePlayer
                             title={vid.title}
