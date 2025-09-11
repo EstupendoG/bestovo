@@ -1,27 +1,26 @@
 import { Client } from '@notionhq/client'
 
-
-
 const notion = new Client({ auth: process.env.NOTION_API_KEY })
 const database = process.env.NOTION_DATABASE_ID
 
 async function handler(req, res) {
-    const data = await getNotionDatabase()
-
-    console.log(data)
-
-    res.status(200).json(data)
+    try{
+        const data = await getNotionDatabase()
+        res.status(200).json(data || [])
+    } catch (err) {
+        console.error(err)
+        res.status(500).json({ error: 'Error getting Notion database' })
+    }
 }
 
 async function getNotionDatabase() {
     try{
         let res = await notion.databases.query({ database_id: database })
-
-        let test = clearJsonRes(res)
-        console.log(test)
-        return test
+        return clearJsonRes(res) || []
+        
     } catch (err) {
-        console.error('Error getting notion data: ' + err)
+        console.error(err)
+        return []
     }
 }
 
