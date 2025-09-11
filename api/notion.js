@@ -1,10 +1,20 @@
 import { Client } from '@notionhq/client'
 
+
+
 const notion = new Client({ auth: process.env.NOTION_API_KEY })
+const database = process.env.NOTION_DATABASE_ID
+
+async function handler(req, res) {
+    const data = await getNotionDatabase()
+
+    console.log(data)
+
+    res.status(200).json(data)
+}
 
 async function getNotionDatabase() {
     try{
-        let database = process.env.NOTION_DATABASE_ID
         let res = await notion.databases.query({ database_id: database })
 
         let test = clearJsonRes(res)
@@ -45,4 +55,4 @@ function clearJsonRes(data) {
     return res
 }
 
-export default getNotionDatabase
+export default handler
