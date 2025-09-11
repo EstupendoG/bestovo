@@ -4,7 +4,7 @@ import styles from './Portfolio.module.css'
 export default function Portfolio() {
 
     useEffect(() => {
-        fetch('api/notion')
+        fetch('/api/notion')
             .then(res => res.json())
             .then(data => {
                 console.log(data)
