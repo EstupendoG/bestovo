@@ -1,6 +1,16 @@
+import { useEffect } from 'react'
 import styles from './Portfolio.module.css'
 
 export default function Portfolio() {
+
+    useEffect(() => {
+        fetch('api/notion')
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+            })
+    }, [])
+
     return(
         <main id='mainContainer'>
             <header id="page-titles">
