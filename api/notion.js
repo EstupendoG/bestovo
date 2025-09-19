@@ -15,8 +15,8 @@ async function handler(req, res) {
 
 async function getNotionDatabase() {
     try{
-        let res = await notion.databases.query({ database_id: database })
-        return clearJsonRes(res) || []
+        let data = await notion.databases.query({ database_id: database })
+        return clearJsonRes(data) || []
         
     } catch (err) {
         console.error(err)
@@ -25,33 +25,26 @@ async function getNotionDatabase() {
 }
 
 function clearJsonRes(data) {
-    let res = []
+    return data.results.map((d) => ({
+        // Nome
+        vidName: d.properties?.Name?.title?.[0]?.text.content || null,
+        // Links
+        vidLinks: {
+            youtube: d.properties?.['Video URL']?.url || null,
+            iframe: d.properties?.iframeUrl?.url || null,
+        },
+        // Tags
+        vidTags: d.properties?.Tags?.multi_select?.map(tag => ({
+            name: tag.name || null,
+            color: tag.color || 'default'
+        })) || null,
+        // Thumbnail
+        vidImg: {
+            alt: d.properties?.Thumbnail?.files?.[0]?.name || null,
+            url: d.properties?.Thumbnail?.files?.[0]?.file?.url || null,
+        },
 
-    data.results.map((d) => {
-        let newVideo = {
-            // Nome
-            vidName: d.properties?.Name?.title?.[0]?.text.content || null,
-            // Links
-            vidLinks: {
-                youtube: d.properties?.['Video URL']?.url || null,
-                iframe: d.properties?.iframeUrl?.url || null,
-            },
-            // Tags
-            vidTags: d.properties?.Tags?.multi_select?.map(tag => ({
-                name: tag.name || null,
-                color: tag.color || 'default'
-            })) || null,
-            // Thumbnail
-            vidImg: {
-                alt: d.properties?.Thumbnail?.files?.[0]?.name || null,
-                url: d.properties?.Thumbnail?.files?.[0]?.file?.url || null,
-            },
-        }
-
-        res.push(newVideo)
-    })
-
-    return res
+    }))
 }
 
 export default handler
