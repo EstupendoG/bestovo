@@ -16,7 +16,8 @@ async function handler(req, res) {
 async function getNotionDatabase() {
     try{
         let data = await notion.databases.query({ database_id: database })
-        return clearJsonRes(data) || []
+        return data
+        // return clearJsonRes(data) || []
         
     } catch (err) {
         console.error(err)
