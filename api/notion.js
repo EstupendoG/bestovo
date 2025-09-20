@@ -12,18 +12,20 @@ async function handler(req, res) {
         res.status(500).json({ error: 'Error getting Notion database' })
     }
 }
-
 async function getNotionDatabase() {
-    try{
-        let data = await notion.databases.query({ database_id: database })
-        return data
-        // return clearJsonRes(data) || []
-        
-    } catch (err) {
-        console.error(err)
-        return []
+  try {
+    let data = await notion.databases.query({ database_id: database })
+    return {
+      database_id: database,
+      total: data.results.length,
+      results: data.results,
     }
+  } catch (err) {
+    console.error(err)
+    return { error: err.message }
+  }
 }
+
 
 function clearJsonRes(data) {
     return data.results.map((d) => ({
