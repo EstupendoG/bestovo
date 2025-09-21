@@ -1,7 +1,6 @@
 a.card{
     background-color: var(--bgColor2);
-    max-width: 160px;
-    width: 100%;
+    width: 160px;
     padding: 7px;
 
     display: grid;
@@ -14,8 +13,8 @@ a.card{
     transition: 200ms all;
 }
     a.card:hover{
-        max-width: fit-content;
-        width: 160px;
+        width: fit-content;
+        min-width: 160px;
         scale: 1.05;
         background: 
             linear-gradient(
