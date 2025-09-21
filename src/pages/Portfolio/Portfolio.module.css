@@ -1,0 +1,18 @@
+section.clientsArea{
+    margin-bottom: 15px;
+    padding: 0 15px;
+    padding-bottom: 15px;
+
+    border-bottom: 1px solid var(--bgColor2);
+}
+
+    .clientsPresentation{
+        font-size: 1.2em;
+    }
+
+    div.clientsContainer{
+        display: flex;
+        gap: 10px;
+        justify-content: start;
+        margin-top: 20px;
+    }
