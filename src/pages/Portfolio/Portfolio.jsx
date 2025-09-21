@@ -36,7 +36,7 @@ export default function Portfolio() {
 
                 <div className={styles.clientsContainer}>
                     {data.filter(d => d.vidTags.some(tag => tag.name === 'Clients')).map(c => (
-                        <ClientCard name={c.vidName} img={vidImg.url} subs='420k' url={vidLinks.youtube}/>
+                        <ClientCard name={c.vidName} img={vidImg.url !== null ? vidImg.url : 'https://www.svgrepo.com/show/379925/alert-error.svg'} subs='420k' url={vidLinks.youtube}/>
                     ))}
                 </div>
 
