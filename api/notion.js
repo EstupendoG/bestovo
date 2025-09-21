@@ -28,6 +28,8 @@ function clearJsonRes(data) {
     return data.results.map((d) => ({
         // Nome
         vidName: d.properties?.Name?.title?.[0]?.text.content || null,
+        // Subs
+        clientSubs: d.properties?.Subs?.number || null,
         // Links
         vidLinks: {
             youtube: d.properties?.['Video URL']?.url || null,

@@ -13,6 +13,35 @@ section.clientsArea{
     div.clientsContainer{
         display: flex;
         gap: 10px;
-        justify-content: start;
+        justify-content: center;
         margin-top: 20px;
     }
+
+@media (max-width: 950px){
+    section.clientsArea{
+        padding: 0 10px;
+        padding-bottom: 15px;
+    }
+
+        div.clientsContainer{
+            gap: 5px;
+            margin-top: 15px;
+        }
+}
+
+@media (max-width: 650px){
+    section.clientsArea{
+        margin-bottom: 10px;
+        padding: 0px;
+        padding-bottom: 10px;
+    }
+
+        .clientsPresentation{
+            font-size: 1.2em;
+        }
+
+        div.clientsContainer{
+            gap: 3px;
+            margin-top: 10px;
+        }
+}

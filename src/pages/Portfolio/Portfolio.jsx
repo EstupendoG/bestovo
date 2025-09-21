@@ -5,14 +5,30 @@ import ClientCard from '../../components/Cards/ClientCard/ClientCard'
 
 
 export default function Portfolio() {
-    const [data, setData] = useState([])
+    const [vids, setVids] = useState([])
+    const [clients, setClients] = useState([])
+
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth)
+    
+    useEffect(() => {
+        const handleResize = () => {
+            setWindowWidth(window.innerWidth)
+        }
+        window.addEventListener('resize', handleResize)
+
+        return () => window.removeEventListener('resize', handleResize)
+    }, [])
 
     useEffect(() => {
         fetch('/api/notion')
             .then(res => res.json())
             .then(data => {
-                setData(data)
-                console.log(data)
+                setVids(
+                    data.filter(d => (d.vidTags.some(tag => tag.name !== 'Clients')))
+                )
+                setClients(
+                    data.filter(d => (d.vidTags.some(tag => tag.name === 'Clients')))
+                )
             })
             .catch(err => console.error('Error reading JSON', err))
     }, [])
@@ -35,10 +51,12 @@ export default function Portfolio() {
                 </h3>
 
                 <div className={styles.clientsContainer}>
-                    {data.filter(d => d.vidTags.some(tag => tag.name === 'Clients')).map(c => (
-                        console.log(c),
-                        <ClientCard name={c.vidName} img={c.vidImg.url} subs='420k' url={c.vidLinks.youtube}/>
-                    ))}
+                    {clients
+                        .sort((a, b) => b.clientSubs - a.clientSubs)
+                        .slice(0, windowWidth > 950 ? 6 : windowWidth > 700 ? 5 : windowWidth > 500 ? 4 : 3)
+                        .map( c => (
+                            <ClientCard name={c.vidName} img={c.vidImg.url} subs={c.clientSubs} url={c.vidLinks.youtube}/>
+                        ))}
                 </div>
 
             </section>
