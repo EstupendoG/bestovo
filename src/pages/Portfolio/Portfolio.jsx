@@ -12,6 +12,7 @@ export default function Portfolio() {
             .then(res => res.json())
             .then(data => {
                 setData(data)
+                console.log(data)
             })
             .catch(err => console.error('Error reading JSON', err))
     }, [])
