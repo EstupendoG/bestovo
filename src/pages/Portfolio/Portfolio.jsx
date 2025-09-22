@@ -5,20 +5,16 @@ import ClientCard from '../../components/Cards/ClientCard/ClientCard'
 
 
 export default function Portfolio() {
+    // Vídeos e clientes buscados na API do Notion
     const [vids, setVids] = useState([])
     const [clients, setClients] = useState([])
 
+    // Largura atual da página
     const [windowWidth, setWindowWidth] = useState(window.innerWidth)
+    // Tags selecionadas para filtrar os vídeos
+    const [vidsTags, setVidsTags] = useState([])
     
-    useEffect(() => {
-        const handleResize = () => {
-            setWindowWidth(window.innerWidth)
-        }
-        window.addEventListener('resize', handleResize)
-
-        return () => window.removeEventListener('resize', handleResize)
-    }, [])
-
+    // Fetch dos dados da API do Notion
     useEffect(() => {
         fetch('/api/notion')
             .then(res => res.json())
@@ -32,6 +28,29 @@ export default function Portfolio() {
             })
             .catch(err => console.error('Error reading JSON', err))
     }, [])
+
+    // Pegando a largura da janela para elementos responsivos
+    useEffect(() => {
+        const handleResize = () => {
+            setWindowWidth(window.innerWidth)
+        }
+        window.addEventListener('resize', handleResize)
+
+        return () => window.removeEventListener('resize', handleResize)
+    }, [])
+
+    useEffect(() => {
+        setVidsTags( () => {
+            let todasTags = vids
+                .flatMap(v => v.vidTags)
+                .map(tag => tag.name)
+                .filter(t => !['-10K', '25K', '50K', '100K', 'Main'].includes(t))
+
+            return [...new Set(todasTags)]
+        })
+        console.log(vidsTags)
+    }, [vids])
+
 
     return(
         <main id='mainContainer'>
@@ -54,11 +73,22 @@ export default function Portfolio() {
                     {clients
                         .sort((a, b) => b.clientSubs - a.clientSubs)
                         .slice(0, windowWidth > 950 ? 6 : windowWidth > 700 ? 5 : windowWidth > 500 ? 4 : 3)
-                        .map( c => (
-                            <ClientCard name={c.vidName} img={c.vidImg.url} subs={c.clientSubs} url={c.vidLinks.youtube}/>
+                        .map( (c, index) => (
+                            <ClientCard name={c.vidName} img={c.vidImg.url} subs={c.clientSubs} url={c.vidLinks.youtube} key={index} />
                         ))}
                 </div>
 
+            </section>
+
+            <section className={styles.vidsArea}>
+                <div className={styles.vidsController}>
+                    <div className={styles.vidsFilter}>
+                        <p></p>
+                        <select name="" id="">
+
+                        </select>
+                    </div>
+                </div>
             </section>
         </main>
     )

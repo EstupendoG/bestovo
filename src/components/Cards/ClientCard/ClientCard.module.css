@@ -3,8 +3,8 @@ a.card{
     padding: 7px;
     max-height: 50px;
 
-    display: flex;
-    align-items: center;
+    display: grid;
+    grid-template-columns: auto 1fr;
     gap: 10px;
 
     flex-grow: 1;
@@ -54,6 +54,7 @@ a.card{
                 padding-left: 2px;
                 
                 display: inline-block;
+                position: absolute;
                 
                 font-family: 'bootstrap-icons';
                 vertical-align: middle;
@@ -138,7 +139,6 @@ div.clientInfo{
     }
 
         .clientName{
-            width: fit-content;
             max-width: 90px;
             min-width: 65px;
             
@@ -188,57 +188,27 @@ div.clientInfo{
         }
 }
 
-@media (max-width: 500px){
-    a.card{
-        padding: 5px;
 
+@media (max-width: 400px){
+    a.card{
         gap: 5px;
     }
         a.card:hover{
             scale: 1.03;
         }
             a.card:hover .clientName{
-                max-width: 120px;
+                max-width: 100px;
             }
 
     img.clientImg{
-        width: 25px;
-        height: 25px;
-    }
-}
-
-@media (max-width: 450px){
-    a.card{
-        padding: 5px;
-
-        gap: 5px;
-    }
-        a.card:hover{
-            scale: 1.03;
-        }
-            a.card:hover .clientName{
-                max-width: 120px;
-            }
-
-    img.clientImg{
-        width: 20px;
-        height: 20px;
-    }
-
-    div.clientInfo{
-        gap: 1px;
+        width: 23px;
+        height: 23px;
     }
 
         .clientName{
-            max-width: 90px;
-            min-width: 60px;
+            max-width: 80px;
+            min-width: 65px;
             
-            font-size: .7em;
-            font-weight: 500;
-        }
-
-        p.clientSubs{
-            font-size: .6em;
-            font-weight: 300;
+            font-size: .75em;
         }
 }

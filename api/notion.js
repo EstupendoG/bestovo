@@ -1,7 +1,7 @@
 import { Client } from '@notionhq/client'
 
 const notion = new Client({ auth: process.env.NOTION_API_KEY })
-const database = process.env.NOTION_DATABASE_ID
+const database_id = process.env.NOTION_DATABASE_ID
 
 async function handler(req, res) {
     try{
@@ -13,10 +13,31 @@ async function handler(req, res) {
     }
 }
 
+function sleep(ms){
+    return new Promise(resolve => setTimeout(resolve, ms))
+}
+
 async function getNotionDatabase() {
     try{
-        let data = await notion.databases.query({ database_id: database })
-        return clearJsonRes(data) || []
+        let cursor = null
+        let database = []
+        while(true){
+            let data = await notion.databases.query({ 
+                database_id: database_id,
+                start_cursor: cursor,
+            })
+            database.push(...data.results)
+
+            let nextCursor = data.next_cursor
+            if(!data.has_more){
+                break
+            }
+
+            await sleep(500)
+            cursor = nextCursor
+        }
+
+        return database
         
     } catch (err) {
         console.error(err)
@@ -25,7 +46,7 @@ async function getNotionDatabase() {
 }
 
 function clearJsonRes(data) {
-    return data.results.map((d) => ({
+    return data.map((d) => ({
         // Nome
         vidName: d.properties?.Name?.title?.[0]?.text.content || null,
         // Subs
