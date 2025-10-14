@@ -19,12 +19,15 @@ export default function Portfolio() {
         fetch('/api/notion')
             .then(res => res.json())
             .then(data => {
+                console.log(data)
                 setVids(
                     data.filter(d => (d.vidTags.some(tag => tag.name !== 'Clients')))
                 )
                 setClients(
                     data.filter(d => (d.vidTags.some(tag => tag.name === 'Clients')))
                 )
+                console.log(vids)
+                console.log(clients)
             })
             .catch(err => console.error('Error reading JSON', err))
     }, [])
@@ -39,6 +42,7 @@ export default function Portfolio() {
         return () => window.removeEventListener('resize', handleResize)
     }, [])
 
+    // Definindo todas as Tags para essa página
     useEffect(() => {
         setVidsTags( () => {
             let todasTags = vids

@@ -19,17 +19,22 @@ function sleep(ms){
 
 async function getNotionDatabase() {
     try{
-        let cursor = null
+        let cursor = undefined
         let database = []
         while(true){
+            console.log(`## Buscando Página`)
+            console.log(`Cursor Atual: ${cursor}`)
+
             let data = await notion.databases.query({ 
                 database_id: database_id,
                 start_cursor: cursor,
             })
             database.push(...data.results)
-
+            
             let nextCursor = data.next_cursor
+            console.log(`Próximo Cursor: ${nextCursor}`)
             if(!data.has_more){
+                console.log(`## Finalizando Busca!`)
                 break
             }
 
@@ -37,7 +42,7 @@ async function getNotionDatabase() {
             cursor = nextCursor
         }
 
-        return database
+        return clearJsonRes(database)
         
     } catch (err) {
         console.error(err)
