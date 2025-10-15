@@ -5,7 +5,7 @@ a.container{
     border-radius: 10px;
     box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.3);
 
-    flex: 1 1 30%;
+    overflow: hidden;
 
     transition: all 200ms ease-out;
 }
@@ -27,39 +27,60 @@ a.container{
         }
         a.container:hover p.overlayText{
             visibility: visible;
+            opacity: 1;
+            scale: 1.1;
         }
+        a.container:hover .vidTitle{
+            text-decoration: underline;
+        }
+            a.container:hover .vidTitle:after{
+                content: '\F1C5';
+                margin-left: 5px;
+
+                display: inline-block;
+                
+                font-size: .8em;
+                font-family: 'bootstrap-icons';
+                text-decoration: none;
+            }
 
     div.cardImg{
-        background-color: black;
-        position: relative;
-    }
+        background-color: rgba(0, 0, 0, 0.3);
 
-        img.vidThumb{
+        position: relative;
+        aspect-ratio: 16/9;
+        overflow: hidden;
+    }
+    
+    img.vidThumb{
+            object-fit: cover;
             width: 100%;
-            aspect-ratio: 16/9;
+            height: 100%;
 
             box-shadow: inset 0 -20px 5px rgba(0, 0, 0, 0.5);
-
-            border-top-left-radius: 10px;
-            border-top-right-radius: 10px;
         }
 
         div.cardImg p.overlayText{
-            font-size: 1.2rem;
-            text-decoration: underline;
             position: absolute;
             top: 0;
             right: 0;
             bottom: 0;
             left: 0;
-            display: flex;
-            justify-content: center;
+
             visibility: hidden;
+            opacity: 0;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
             align-items: center;
-            padding: 10px 20px;
+
+            transition: all 150ms ease-out, visibility 0ms;
         }
             div.cardImg p.overlayText i{
-                margin-left: 5px;
+                font-size: 4rem;
+                color: var(--txtColor);
+                opacity: .8;
             }
 
     div.cardText{
@@ -71,7 +92,7 @@ a.container{
     }
 
     .vidTitle{
-        font-size: 1.15rem;
+        font-size: 1rem;
 
         white-space: nowrap;
         overflow: hidden;
@@ -84,10 +105,10 @@ a.container{
     }
 
         p.tag{
-            font-size: .9em;
-            font-weight: bold;
-            padding: 4px 7px 2px;
+            font-size: .8em;
+            padding: 3px 7px 2px;
             border-radius: 3px;
+            text-wrap: nowrap;
         }
 
         p.tag.yellow{
@@ -100,8 +121,18 @@ a.container{
             background-color: #0d792e;
         }
         p.tag.purple{
-            background-color: #b82de2;
-            animation: shine-around 5s infinite ease-out;
+            background: 
+                linear-gradient(
+                    45deg,
+                    transparent 0%,
+                    rgba(255, 255, 255, 0.2) 60%,
+                    transparent 100%
+                ),
+                #b82de2;
+
+            font-weight: bold;
+            
+            animation: shine-background 3s infinite ease;
         }
         p.tag.orange{
             background-color: #cf7e04;
@@ -116,15 +147,74 @@ a.container{
             background-color: #c4466c;
         }
 
-@keyframes shine-around{
-    from,to{
-        text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
-        filter: saturate(1);
+
+
+@media (max-width: 650px){
+    a.container{
+        border-radius: 5px;
     }
-    50%{
-        text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
-        filter: saturate(1.1);
+
+                div.cardImg p.overlayText i{
+                    font-size: 3rem;
+                }
+
+        div.cardText{
+            padding: 10px;
+
+            gap: 7px;
+        }
+
+        .vidTitle{
+            font-size: .85rem;
+        }
+
+        div.tagsContainer{
+            gap: 3px;
+        }
+
+            p.tag{
+                font-size: .65em;
+                padding: 3px 5px 2px;
+            }
+
+            p.tag.purple{
+            font-weight: normal;
+        }
+
+}
+
+@media (max-width: 500px){
+    a.container{
+        border-radius: 5px;
     }
+
+                div.cardImg p.overlayText i{
+                    font-size: 3rem;
+                }
+
+        div.cardText{
+            padding: 10px;
+
+            gap: 7px;
+        }
+
+        .vidTitle{
+            font-size: .85rem;
+        }
+
+        div.tagsContainer{
+            gap: 3px;
+        }
+
+            p.tag{
+                font-size: .65em;
+                padding: 3px 5px 2px;
+            }
+
+            p.tag.purple{
+            font-weight: normal;
+        }
+
 }
 
 @keyframes shine-background {
