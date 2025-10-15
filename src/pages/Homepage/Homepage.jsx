@@ -12,29 +12,18 @@ export default function Homepage() {
     const { vids, isLoading } = useNotionApi()
 
     // ESTADOS
+    // Vídeos com a tag Main
     const mainVideos = vids ? vids.filter(v =>
         v.vidTags.some(tag => tag.name === 'Main')
     ) : []
+    // Iframe dos vídeos com a tag Main
     const iframeVideos = mainVideos.map(vid => (
             {
                 title: vid.vidName,
                 url: vid.vidLinks.iframe,
             }
         ))
-    // const [iframeVideos, setIframeVideos] = useState([
-    //     {
-    //         title: "Sure it's a calming notion",
-    //         url: 'https://www.youtube.com/embed/Co7t6NxsW-4?si=phbhNZb99Hp_5grb',
-    //     },
-    //     {
-    //         title: "Perpetual in motion",
-    //         url: 'https://www.youtube.com/embed/W9Yjgf6eE_Y?si=0WfMfsfsIOriwXz-',
-    //     },
-    //     {
-    //         title: "But it's a lie",
-    //         url: 'https://www.youtube.com/embed/Co7t6NxsW-4?si=phbhNZb99Hp_5grb',
-    //     },
-    // ])
+
     const [windowWidth, setWindowWidth] = useState(window.innerWidth)
 
 
@@ -75,10 +64,10 @@ export default function Homepage() {
                 <aside className={styles.aboutContents}>
 
                     <p className={styles.aboutText}>
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ullam adipisci ad labore dolores tempore, at iusto itaque nesciunt molestias quas neque officiis reiciendis, molestiae dolorem. Aut sit, reiciendis beatae eligendi voluptatum, quo ex doloribus odio, eius consequuntur impedit debitis commodi!
+                        I’m a video editor with experience turning ideas into dynamic, clear, and engaging content. Specializing in YouTube, I create everything from fast-paced gaming edits to educational and entertainment videos, with attention to pacing, sound effects, and visual storytelling.
                     </p>
                     <p className={styles.aboutText}>
-                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nobis distinctio corrupti animi explicabo porro. Aliquam doloribus numquam quam nam necessitatibus eum voluptatibus itaque! Laudantium beatae molestias, ea itaque nihil amet provident. Velit facilis voluptatum voluptatem accusantium, quam architecto? Suscipit, consequuntur!
+                        Passionate about creativity and technology, I strive to deliver projects that stand out and captivate audiences while maintaining quality and meeting deadlines. Outside of editing, I enjoy exploring new trends, expanding my technical skills, and refining every detail of my work.
                     </p>
 
                     <div className={styles.contactContainer}>
