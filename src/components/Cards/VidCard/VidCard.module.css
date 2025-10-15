@@ -20,7 +20,7 @@ a.container{
             var(--bgColor2);
         
         scale: 1.03;
-        animation: shine-background 3s ease-out infinite ;
+        animation: shine-background 2.5s ease-out infinite ;
     }
         a.container:hover img.vidThumb{
             opacity: 40%;
@@ -45,20 +45,27 @@ a.container{
             }
 
     div.cardImg{
-        background-color: rgba(0, 0, 0, 0.3);
-
         position: relative;
         aspect-ratio: 16/9;
         overflow: hidden;
     }
+        div.cardImg::after{
+            content: '';
+            position: absolute;
+            display: block;
+            top: 0;
+            box-shadow: inset 0 0 10px 5px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            height: 100%;
+        }
     
-    img.vidThumb{
+        img.vidThumb{
             object-fit: cover;
             width: 100%;
             height: 100%;
-
-            box-shadow: inset 0 -20px 5px rgba(0, 0, 0, 0.5);
         }
+            img.vidThumb:after{
+            }
 
         div.cardImg p.overlayText{
             position: absolute;
@@ -102,6 +109,8 @@ a.container{
     div.tagsContainer{
         display: flex;
         gap: 5px;
+        flex-wrap: wrap;
+
     }
 
         p.tag{

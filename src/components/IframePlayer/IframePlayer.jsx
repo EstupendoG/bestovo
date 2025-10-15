@@ -18,7 +18,7 @@ const IframePlayer = ({url, title}) => {
             </iframe>
 
             { isLoading && (
-                <Skeleton isLoading={isLoading} />
+                <Skeleton isLoading={isLoading} minHeight={200}/>
             )}
         </>
     )

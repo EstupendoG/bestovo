@@ -1,11 +1,15 @@
+import { useState } from 'react';
 import styles from './VidCard.module.css';
+import Skeleton from '../../Skeleton/Skeleton';
 
 const VidCard = ({video, unwantedTags}) => {
+    const[isLoading, setIsLoading] = useState(true)
 
     return(
         <a className={styles.container} href={video.vidLinks.youtube} target='_blanket'>
             <div className={styles.cardImg}>
-                <img src={video.vidImg.url} alt={`Video Thumbnail ${video.vidImg.alt}`} className={styles.vidThumb}/>
+                <Skeleton isLoading={isLoading}/>
+                <img src={video.vidImg.url} alt={`Video Thumbnail ${video.vidImg.alt}`} className={styles.vidThumb} onLoad={() => setIsLoading(false)}/>
                 <p className={styles.overlayText}>
                     <i className="bi bi-youtube"></i>
                 </p>

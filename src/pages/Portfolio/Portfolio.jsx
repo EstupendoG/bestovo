@@ -3,6 +3,7 @@ import styles from './Portfolio.module.css'
 
 import ClientCard from '../../components/Cards/ClientCard/ClientCard'
 import VidCard from '../../components/Cards/VidCard/VidCard'
+import Skeleton from '../../components/Skeleton/Skeleton'
 
 
 export default function Portfolio() {
@@ -16,6 +17,8 @@ export default function Portfolio() {
     const [unwantedTags, setUnwantedTags] = useState(['-10K', '25K', '50K', '100K', 'Main']) // Não Desejadas
     const [vidsTags, setVidsTags] = useState([]) // Desejadas
     const [tagFilter, setTagFilter] = useState() // Filtro de Tag Atual
+
+    const [isLoading, setIsLoading] = useState(true)
     
     // Fetch dos dados da API do Notion
     useEffect(() => {
@@ -31,7 +34,12 @@ export default function Portfolio() {
                     data.filter(d => (d.vidTags.some(tag => tag.name === 'Clients')))
                 )
             })
-            .catch(err => console.error('Error reading JSON', err))
+            .catch(
+                err => console.error('Error reading JSON', err)
+            )
+            .finally(
+                () => setIsLoading(false)
+            )
     }, [])
 
     // Pegando a largura da janela para elementos responsivos
@@ -56,6 +64,10 @@ export default function Portfolio() {
         })
     }, [vids])
 
+    useEffect(() => {
+        console.log(isLoading)
+    }, [isLoading])
+
     return(
         <main id='mainContainer'>
             <header id="page-titles">
@@ -79,12 +91,15 @@ export default function Portfolio() {
                 </h3>
 
                 <div className={styles.clientsContainer}>
+                    <Skeleton isLoading={isLoading} minHeight={50}/>
+                    
                     {clients
                         .sort((a, b) => b.clientSubs - a.clientSubs)
                         .slice(0, windowWidth > 950 ? 6 : windowWidth > 700 ? 5 : windowWidth > 500 ? 4 : 3)
                         .map( (c, index) => (
                             <ClientCard name={c.vidName} img={c.vidImg.url} subs={c.clientSubs} url={c.vidLinks.youtube} key={index} />
-                        ))}
+                        ))
+                    }
                 </div>
 
             </section>
@@ -118,17 +133,24 @@ export default function Portfolio() {
 
                 {/* Display dos Vídeos */}
                 <main className={styles.vidsContainer}>
+                    {/* Skeleton */}
+                    {[...Array(12)]
+                        .map( (_, index) => 
+                            <Skeleton isLoading={isLoading} minHeight={150} key={index}/>
+                    )}
+
+                    {/* Iterando sobre vídeos de acordo com a tag do filtro */}
                     {tagFilter 
-                    ? vids
-                        .filter(vid => vid.vidTags
-                        .some(tag => tag.name === tagFilter))
-                        .map((v, index) => (
-                            <VidCard video={v} key={index}/>
-                        ))
-                    : vids
-                        .map((v, index) => (
-                            <VidCard video={v} key={index} />
-                        ))
+                        ? vids
+                            .filter(vid => vid.vidTags
+                            .some(tag => tag.name === tagFilter))
+                            .map((v, index) => (
+                                <VidCard video={v} key={index}/>
+                            ))
+                        : vids
+                            .map((v, index) => (
+                                <VidCard video={v} key={index} />
+                            ))
                     }
                 </main>
 
