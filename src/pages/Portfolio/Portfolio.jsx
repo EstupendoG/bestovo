@@ -1,40 +1,32 @@
-import { use, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
+import useNotionApi from '../../hooks/useNotionApi'
 import styles from './Portfolio.module.css'
 
 import ClientCard from '../../components/Cards/ClientCard/ClientCard'
 import VidCard from '../../components/Cards/VidCard/VidCard'
+import Skeleton from '../../components/Skeleton/Skeleton'
 
 
 export default function Portfolio() {
-    // Vídeos e clientes buscados na API do Notion
-    const [vids, setVids] = useState([])
-    const [clients, setClients] = useState([])
+    // API DO NOTION
+    const { vids, clients, isLoading } = useNotionApi()
 
-    // Largura atual da página
+    // ESTADOS
     const [windowWidth, setWindowWidth] = useState(window.innerWidth)
+
     // Tags selecionadas para filtrar os vídeos
     const [unwantedTags, setUnwantedTags] = useState(['-10K', '25K', '50K', '100K', 'Main']) // Não Desejadas
-    const [vidsTags, setVidsTags] = useState([]) // Desejadas
+    const vidsTags = vids ? [...new Set(vids
+        .flatMap(v => v.vidTags)
+        .map(tag => tag.name)
+        .filter(t => !unwantedTags.includes(t))
+    )] : []
     const [tagFilter, setTagFilter] = useState() // Filtro de Tag Atual
-    
-    // Fetch dos dados da API do Notion
-    useEffect(() => {
-        fetch('/api/notion')
-            .then(res => res.json())
-            .then(data => {
-                // Define "vídeos" como todo registro em Data sem a tag 'Clients'
-                setVids(
-                    data.filter(d => (d.vidTags.some(tag => tag.name !== 'Clients')))
-                )
-                // Define "clientes" como todo registro em Data com a tag 'Clients'
-                setClients(
-                    data.filter(d => (d.vidTags.some(tag => tag.name === 'Clients')))
-                )
-            })
-            .catch(err => console.error('Error reading JSON', err))
-    }, [])
 
-    // Pegando a largura da janela para elementos responsivos
+
+
+    // EFFECTS
+    // Pegando a largura da janela
     useEffect(() => {
         const handleResize = () => {
             setWindowWidth(window.innerWidth)
@@ -44,17 +36,7 @@ export default function Portfolio() {
         return () => window.removeEventListener('resize', handleResize)
     }, [])
 
-    // Definindo todas as Tags úteis para essa página
-    useEffect(() => {
-        setVidsTags( () => {
-            let todasTags = vids
-                .flatMap(v => v.vidTags)
-                .map(tag => tag.name)
-                .filter(t => !unwantedTags.includes(t))
 
-            return [...new Set(todasTags)]
-        })
-    }, [vids])
 
     return(
         <main id='mainContainer'>
@@ -79,12 +61,15 @@ export default function Portfolio() {
                 </h3>
 
                 <div className={styles.clientsContainer}>
+                    <Skeleton isLoading={isLoading} minHeight={50}/>
+                    
                     {clients
                         .sort((a, b) => b.clientSubs - a.clientSubs)
                         .slice(0, windowWidth > 950 ? 6 : windowWidth > 700 ? 5 : windowWidth > 500 ? 4 : 3)
                         .map( (c, index) => (
                             <ClientCard name={c.vidName} img={c.vidImg.url} subs={c.clientSubs} url={c.vidLinks.youtube} key={index} />
-                        ))}
+                        ))
+                    }
                 </div>
 
             </section>
@@ -118,17 +103,24 @@ export default function Portfolio() {
 
                 {/* Display dos Vídeos */}
                 <main className={styles.vidsContainer}>
+                    {/* Skeleton */}
+                    {[...Array(12)]
+                        .map( (_, index) => 
+                            <Skeleton isLoading={isLoading} minHeight={150} key={index}/>
+                    )}
+
+                    {/* Iterando sobre vídeos de acordo com a tag do filtro */}
                     {tagFilter 
-                    ? vids
-                        .filter(vid => vid.vidTags
-                        .some(tag => tag.name === tagFilter))
-                        .map((v, index) => (
-                            <VidCard video={v} key={index}/>
-                        ))
-                    : vids
-                        .map((v, index) => (
-                            <VidCard video={v} key={index} />
-                        ))
+                        ? vids
+                            .filter(vid => vid.vidTags
+                            .some(tag => tag.name === tagFilter))
+                            .map((v, index) => (
+                                <VidCard video={v} key={index}/>
+                            ))
+                        : vids
+                            .map((v, index) => (
+                                <VidCard video={v} key={index} />
+                            ))
                     }
                 </main>
 
