@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react'
+import { use, useEffect, useState } from 'react'
 import styles from './Portfolio.module.css'
 
 import ClientCard from '../../components/Cards/ClientCard/ClientCard'
+import VidCard from '../../components/Cards/VidCard/VidCard'
 
 
 export default function Portfolio() {
@@ -12,22 +13,23 @@ export default function Portfolio() {
     // Largura atual da página
     const [windowWidth, setWindowWidth] = useState(window.innerWidth)
     // Tags selecionadas para filtrar os vídeos
-    const [vidsTags, setVidsTags] = useState([])
+    const [unwantedTags, setUnwantedTags] = useState(['-10K', '25K', '50K', '100K', 'Main']) // Não Desejadas
+    const [vidsTags, setVidsTags] = useState([]) // Desejadas
+    const [tagFilter, setTagFilter] = useState() // Filtro de Tag Atual
     
     // Fetch dos dados da API do Notion
     useEffect(() => {
         fetch('/api/notion')
             .then(res => res.json())
             .then(data => {
-                console.log(data)
+                // Define "vídeos" como todo registro em Data sem a tag 'Clients'
                 setVids(
                     data.filter(d => (d.vidTags.some(tag => tag.name !== 'Clients')))
                 )
+                // Define "clientes" como todo registro em Data com a tag 'Clients'
                 setClients(
                     data.filter(d => (d.vidTags.some(tag => tag.name === 'Clients')))
                 )
-                console.log(vids)
-                console.log(clients)
             })
             .catch(err => console.error('Error reading JSON', err))
     }, [])
@@ -42,19 +44,17 @@ export default function Portfolio() {
         return () => window.removeEventListener('resize', handleResize)
     }, [])
 
-    // Definindo todas as Tags para essa página
+    // Definindo todas as Tags úteis para essa página
     useEffect(() => {
         setVidsTags( () => {
             let todasTags = vids
                 .flatMap(v => v.vidTags)
                 .map(tag => tag.name)
-                .filter(t => !['-10K', '25K', '50K', '100K', 'Main'].includes(t))
+                .filter(t => !unwantedTags.includes(t))
 
             return [...new Set(todasTags)]
         })
-        console.log(vidsTags)
     }, [vids])
-
 
     return(
         <main id='mainContainer'>
@@ -68,6 +68,7 @@ export default function Portfolio() {
                 </h1>
             </header>
 
+            {/* Seção dos Clientes */}
             <section className={styles.clientsArea}>
                 <h3 className={styles.clientsPresentation}>
                     Some fellas that I already worked with:
@@ -84,15 +85,47 @@ export default function Portfolio() {
 
             </section>
 
+            {/* Seção dos Vídeos */}
             <section className={styles.vidsArea}>
-                <div className={styles.vidsController}>
+                <header className={styles.vidsController}>
+                    {/* Filtros */}
                     <div className={styles.vidsFilter}>
-                        <p></p>
-                        <select name="" id="">
+                        <label for="tagFilter">Current Video Filter: </label>
 
+                        <select id="tagFilter" onChange={e => setTagFilter(e.target.value)}>
+                            <option value=""> None </option> {/* Valor Padrão */}
+                            {/* Valores do Notion */}
+                            {vidsTags.map((tag, index) => (
+                                <option value={tag} key={index}>
+                                    {tag} 
+                                </option>
+                            ))}
                         </select>
+                        
                     </div>
-                </div>
+
+                    <a className={styles.homepageBtn} href='/'>
+                        <i className="bi bi-chevron-left"></i>
+                        Return to Homepage
+                    </a>
+                </header>
+
+                {/* Display dos Vídeos */}
+                <main className={styles.vidsContainer}>
+                    {tagFilter 
+                    ? vids
+                        .filter(vid => vid.vidTags
+                        .some(tag => tag.name === tagFilter))
+                        .map((v, index) => (
+                            <VidCard video={v} key={index}/>
+                        ))
+                    : vids
+                        .map((v, index) => (
+                            <VidCard video={v} key={index} />
+                        ))
+                    }
+                </main>
+
             </section>
         </main>
     )
