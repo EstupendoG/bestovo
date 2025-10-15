@@ -71,7 +71,11 @@ export default function Portfolio() {
             {/* Seção dos Clientes */}
             <section className={styles.clientsArea}>
                 <h3 className={styles.clientsPresentation}>
-                    Some fellas that I already worked with:
+                    {/* Muda o texto de acordo com o tamanho da tela */}
+                    {windowWidth >= 500 
+                        ? 'Some fellas that I already worked with:' 
+                        : 'My Main Clients:'
+                    }
                 </h3>
 
                 <div className={styles.clientsContainer}>
@@ -104,10 +108,12 @@ export default function Portfolio() {
                         
                     </div>
 
-                    <a className={styles.homepageBtn} href='/'>
-                        <i className="bi bi-chevron-left"></i>
-                        Return to Homepage
-                    </a>
+                    {windowWidth >= 650 && (
+                        <a className={styles.homepageBtn} href='/'>
+                            <i className="bi bi-chevron-left"></i>
+                            Return to Homepage
+                        </a>
+                    )}
                 </header>
 
                 {/* Display dos Vídeos */}

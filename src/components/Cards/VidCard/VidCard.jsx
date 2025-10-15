@@ -7,14 +7,13 @@ const VidCard = ({video, unwantedTags}) => {
             <div className={styles.cardImg}>
                 <img src={video.vidImg.url} alt={`Video Thumbnail ${video.vidImg.alt}`} className={styles.vidThumb}/>
                 <p className={styles.overlayText}>
-                    Watch on Youtube 
-                    <i className="bi bi-box-arrow-up-right"></i>
+                    <i className="bi bi-youtube"></i>
                 </p>
             </div>
 
             <div className={styles.cardText}>
                 <h5 className={styles.vidTitle}>
-                    {video.vidName}
+                    {(video.vidName).trim()}
                 </h5>
                 <div className={styles.tagsContainer}>
                     {video.vidTags.map((tag, index) => (
