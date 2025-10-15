@@ -17,6 +17,69 @@ section.clientsArea{
         margin-top: 20px;
     }
 
+section.vidsArea{
+
+}
+
+    header.vidsController{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+        div.vidsFilter{
+
+        }
+            div.vidsFilter label{
+                font-size: 1.2em;
+            }
+            div.vidsFilter select{
+                background-color: var(--bgColor2);
+                margin: 0 5px;
+                padding: 5px 10px;
+
+                color: var(--txtColor);
+                font-size: 1.15em;
+
+                border: 0;
+                border-radius: 5px;
+
+                cursor: pointer;
+                transition: 100ms ease-out;
+            }
+                div.vidsFilter select:hover{
+                    scale: 1.02;
+                }
+                div.vidsFilter select:focus{
+                    scale: 1.01;
+                    outline: 1px solid var(--color1);
+                }
+                div.vidsFilter select option:hover{
+                    box-shadow: inset 0 0 10px 100px var(--color1);
+                }
+        
+        a.homepageBtn{
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 100ms ;
+        }
+            a.homepageBtn:hover{
+                scale: 1.02;
+                text-decoration: underline;
+            }
+            a.homepageBtn i{
+                margin-right: 5px;
+            }
+
+main.vidsContainer{
+    margin-top: 30px;
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+
 @media (max-width: 950px){
     section.clientsArea{
         padding: 0 10px;
@@ -37,11 +100,17 @@ section.clientsArea{
     }
 
         .clientsPresentation{
-            font-size: 1.2em;
+            font-size: 1.1em;
         }
 
         div.clientsContainer{
             gap: 3px;
             margin-top: 10px;
         }
+}
+
+@media (max-width: 500px){
+    .clientsPresentation{
+        font-size: .9em;
+    }
 }
