@@ -1,31 +1,46 @@
-import { use, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
+import useNotionApi from '../../hooks/useNotionApi'
 import styles from './Homepage.module.css'
 
-import Skeleton from '../../components/Skeleton/Skeleton'
-import IframePlayer from '../../components/IframePlayer/IframePlayer'
+
 import Carousel from '../../components/Carousel/Carousel'
 
 import bestovoPic from '../../assets/img/bestovo.png'
 
 export default function Homepage() {
+    // API DO NOTION
+    const { vids, isLoading } = useNotionApi()
 
-    const [iframeVideos, setIframeVideos] = useState([
-        {
-            title: "Sure it's a calming notion",
-            url: 'https://www.youtube.com/embed/Co7t6NxsW-4?si=phbhNZb99Hp_5grb',
-        },
-        {
-            title: "Perpetual in motion",
-            url: 'https://www.youtube.com/embed/W9Yjgf6eE_Y?si=0WfMfsfsIOriwXz-',
-        },
-        {
-            title: "But it's a lie",
-            url: 'https://www.youtube.com/embed/Co7t6NxsW-4?si=phbhNZb99Hp_5grb',
-        },
-    ])
-
+    // ESTADOS
+    const mainVideos = vids ? vids.filter(v =>
+        v.vidTags.some(tag => tag.name === 'Main')
+    ) : []
+    const iframeVideos = mainVideos.map(vid => (
+            {
+                title: vid.vidName,
+                url: vid.vidLinks.iframe,
+            }
+        ))
+    // const [iframeVideos, setIframeVideos] = useState([
+    //     {
+    //         title: "Sure it's a calming notion",
+    //         url: 'https://www.youtube.com/embed/Co7t6NxsW-4?si=phbhNZb99Hp_5grb',
+    //     },
+    //     {
+    //         title: "Perpetual in motion",
+    //         url: 'https://www.youtube.com/embed/W9Yjgf6eE_Y?si=0WfMfsfsIOriwXz-',
+    //     },
+    //     {
+    //         title: "But it's a lie",
+    //         url: 'https://www.youtube.com/embed/Co7t6NxsW-4?si=phbhNZb99Hp_5grb',
+    //     },
+    // ])
     const [windowWidth, setWindowWidth] = useState(window.innerWidth)
 
+
+
+    // EFFECTS
+    // Pegando a largura da janela
     useEffect(() => {
         const handleResize = () => {
             setWindowWidth(window.innerWidth)
@@ -34,6 +49,8 @@ export default function Homepage() {
 
         return () => window.removeEventListener('resize', handleResize)
     }, [])
+
+
 
     return(
         <main id='mainContainer'>
