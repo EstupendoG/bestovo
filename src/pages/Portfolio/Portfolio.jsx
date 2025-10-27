@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import useNotionApi from '../../hooks/useNotionApi'
 import styles from './Portfolio.module.css'
 
@@ -23,6 +23,10 @@ export default function Portfolio() {
     )] : []
     const [tagFilter, setTagFilter] = useState() // Filtro de Tag Atual
 
+    // SCROLL INFINITO
+    const scrollStep = 24
+    const [scrollPointer, setScrollPointer] = useState(scrollStep)
+    const scrollRef = useRef()
 
 
     // EFFECTS
@@ -36,6 +40,24 @@ export default function Portfolio() {
         return () => window.removeEventListener('resize', handleResize)
     }, [])
 
+    // Observer para o scroll infinito
+    useEffect(() => {
+        const vidsObserver = new IntersectionObserver((elements) => {
+            // Se o elemento trigger do observer estiver na tela
+            if (elements[0].isIntersecting === true) {
+                // Aumenta STEP do ponteiro
+                setScrollPointer((prev) => prev + scrollStep)
+            }
+        } , {rootMargin: '5px'})
+
+        // Chama o observer e define a Referencia 
+        if (scrollRef.current) {
+            vidsObserver.observe(scrollRef.current)
+        }
+
+        return () => vidsObserver.disconnect()
+
+    }, [vids])
 
 
     return(
@@ -81,7 +103,11 @@ export default function Portfolio() {
                     <div className={styles.vidsFilter}>
                         <label for="tagFilter">Current Video Filter: </label>
 
-                        <select id="tagFilter" onChange={e => setTagFilter(e.target.value)}>
+                        <select id="tagFilter" 
+                            onChange={e => {
+                                setTagFilter(e.target.value)
+                                setScrollPointer(scrollStep)
+                            }}>
                             <option value=""> None </option> {/* Valor Padrão */}
                             {/* Valores do Notion */}
                             {vidsTags.map((tag, index) => (
@@ -114,14 +140,18 @@ export default function Portfolio() {
                         ? vids
                             .filter(vid => vid.vidTags
                             .some(tag => tag.name === tagFilter))
+                            .slice(0, scrollPointer)
                             .map((v, index) => (
-                                <VidCard video={v} key={index}/>
+                                <VidCard video={v} key={v.vidLinks.youtube}/>
                             ))
                         : vids
+                            .slice(0, scrollPointer)
                             .map((v, index) => (
-                                <VidCard video={v} key={index} />
+                                <VidCard video={v} key={v.vidLinks.youtube} />
                             ))
                     }
+
+                    <div ref={scrollRef} style={{visibility: 'hidden'}}></div>
                 </main>
 
             </section>

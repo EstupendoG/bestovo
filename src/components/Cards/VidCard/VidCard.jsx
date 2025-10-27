@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, memo } from 'react';
 import styles from './VidCard.module.css';
 import Skeleton from '../../Skeleton/Skeleton';
 
@@ -9,7 +9,7 @@ const VidCard = ({video, unwantedTags}) => {
         <a className={styles.container} href={video.vidLinks.youtube} target='_blanket'>
             <div className={styles.cardImg}>
                 <Skeleton isLoading={isLoading}/>
-                <img src={video.vidImg.url} alt={`Video Thumbnail ${video.vidImg.alt}`} className={styles.vidThumb} onLoad={() => setIsLoading(false)}/>
+                <img src={video.vidImg.url} alt={`Video Thumbnail ${video.vidImg.alt}`} className={styles.vidThumb} onLoad={() => setIsLoading(false)} loading='lazy'/>
                 <p className={styles.overlayText}>
                     <i className="bi bi-youtube"></i>
                 </p>
@@ -31,4 +31,4 @@ const VidCard = ({video, unwantedTags}) => {
     )
 }
 
-export default VidCard
+export default memo(VidCard)
